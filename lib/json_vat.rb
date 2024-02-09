@@ -17,7 +17,7 @@ module JSONVAT
     end
 
     def host
-      @host ||= 'https://raw.githubusercontent.com/kundi/json-vat/master/vat-rates.json'
+      @host ||= 'https://raw.githubusercontent.com/ibericode/vat-rates/master/vat-rates.json'
     end
 
     attr_writer :cache_backend
@@ -25,9 +25,9 @@ module JSONVAT
     attr_writer :host
 
     def download
-      # Net::HTTP.get_response(URI.parse(self.host)).body.force_encoding("utf-8")
-      file_path = File.join(File.dirname(__FILE__), '../vat-rates.json' )
-      File.read(file_path)
+      Net::HTTP.get_response(URI.parse(self.host)).body.force_encoding("utf-8")
+      # file_path = File.join(File.dirname(__FILE__), '../vat-rates.json' )
+      # File.read(file_path)
     end
 
     def cache
@@ -45,9 +45,9 @@ module JSONVAT
     end
 
     def load_rates
-      JSON.parse(self.rates_through_cache)['rates'].map do |country|
-        JSONVAT::Country.new(country)
-      end
+      JSON.parse(self.rates_through_cache)['items'].map {
+          |key, country| [key, JSONVAT::Country.new(country)]
+        }.to_h
     end
 
     def reload_rates?
@@ -69,7 +69,7 @@ module JSONVAT
       if code == 'UK' then code = 'GB' end
       if code == 'EL' then code = 'GR' end
 
-      self.rates.find { |r| r.country_code == code }
+      self.rates[code]
     end
 
     def [](country)
