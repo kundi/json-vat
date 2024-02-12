@@ -8,58 +8,26 @@ module JSONVAT
 
   class << self
 
-    def perform_caching?
-      @perform_caching != false
-    end
-
-    def cache_backend
-      @cache_backend ||= FileCacheBackend.new
-    end
-
     def host
-      @host ||= 'https://raw.githubusercontent.com/kundi/json-vat/master/vat-rates.json'
+      @host ||= 'https://raw.githubusercontent.com/ibericode/vat-rates/master/vat-rates.json'
     end
 
-    attr_writer :cache_backend
-    attr_writer :perform_caching
+    attr_writer :rates
+    attr_writer :cache
     attr_writer :host
 
-    def download
-      # Net::HTTP.get_response(URI.parse(self.host)).body.force_encoding("utf-8")
-      file_path = File.join(File.dirname(__FILE__), '../vat-rates.json' )
-      File.read(file_path)
-    end
-
     def cache
-      content = self.download
-      self.cache_backend.write(content)
-      content
-    end
-
-    def rates_through_cache
-      if self.perform_caching?
-        self.cache_backend.read || self.cache
-      else
-        self.download
-      end
-    end
-
-    def load_rates
-      JSON.parse(self.rates_through_cache)['rates'].map do |country|
-        JSONVAT::Country.new(country)
-      end
-    end
-
-    def reload_rates?
-      !self.perform_caching? || (self.perform_caching? && self.cache_backend.invalid?)
+      @cache ||= download
     end
 
     def rates
-      if reload_rates?
-        @rates = load_rates
-      else
-        @rates
-      end
+      @rates ||= JSON.parse(self.cache)['items'].map {
+        |key, country| [key, JSONVAT::Country.new(country)]
+      }.to_h
+    end
+
+    def download
+      Net::HTTP.get_response(URI.parse(self.host)).body.force_encoding("utf-8")
     end
 
     def country(country)
@@ -69,7 +37,7 @@ module JSONVAT
       if code == 'UK' then code = 'GB' end
       if code == 'EL' then code = 'GR' end
 
-      self.rates.find { |r| r.country_code == code }
+      self.rates[code]
     end
 
     def [](country)
