@@ -17,13 +17,17 @@ module JSONVAT
     attr_writer :host
 
     def cache
-      @cache ||= Net::HTTP.get_response(URI.parse(self.host)).body.force_encoding("utf-8")
+      @cache ||= download
     end
 
     def rates
       @rates ||= JSON.parse(self.cache)['items'].map {
         |key, country| [key, JSONVAT::Country.new(country)]
       }.to_h
+    end
+
+    def download
+      Net::HTTP.get_response(URI.parse(self.host)).body.force_encoding("utf-8")
     end
 
     def country(country)
