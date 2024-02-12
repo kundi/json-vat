@@ -1,12 +1,6 @@
 require 'json_vat'
 
 
-RSpec.configure do |config|
-  config.before(:suite) do
-    JSONVAT.perform_caching = false
-  end
-end
-
 describe JSONVAT do
     it "Slovenia's VAT is 22%" do
       expect(
