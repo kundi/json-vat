@@ -96,6 +96,13 @@
       "country_code": "CZ",
       "periods": [
         {
+          "effective_from": "2024-01-01",
+          "rates": {
+            "reduced": 12.0,
+            "standard": 21.0
+          }
+        },
+        {
           "effective_from": "0000-01-01",
           "rates": {
             "reduced": 15.0,
@@ -153,6 +160,26 @@
       "code": "IE",
       "country_code": "IE",
       "periods": [
+        {
+          "effective_from": "2021-03-01",
+          "rates": {
+            "super_reduced": 4.8,
+            "reduced1": 9.0,
+            "reduced2": 13.5,
+            "standard": 23.0,
+            "parking": 13.5
+          }
+        },
+        {
+          "effective_from": "2020-09-01",
+          "rates": {
+            "super_reduced": 4.8,
+            "reduced1": 9.0,
+            "reduced2": 13.5,
+            "standard": 21.0,
+            "parking": 13.5
+          }
+        },
         {
           "effective_from": "0000-01-01",
           "rates": {
@@ -229,6 +256,24 @@
       "country_code": "LU",
       "periods": [
         {
+          "effective_from": "2024-01-01",
+          "rates": {
+            "super_reduced": 3.0,
+            "reduced1": 8.0,
+            "standard": 17.0,
+            "parking": 14.0
+          }
+        },
+        {
+          "effective_from": "2023-01-01",
+          "rates": {
+            "super_reduced": 3.0,
+            "reduced1": 7.0,
+            "standard": 16.0,
+            "parking": 13.0
+          }
+        },
+        {
           "effective_from": "2016-01-01",
           "rates": {
             "super_reduced": 3.0,
@@ -296,6 +341,20 @@
       "country_code": "EE",
       "periods": [
         {
+          "effective_from": "2025-01-01",
+          "rates": {
+            "reduced": 13.0,
+            "standard": 22.0
+          }
+        },
+        {
+          "effective_from": "2024-01-01",
+          "rates": {
+            "reduced": 9.0,
+            "standard": 22.0
+          }
+        },
+        {
           "effective_from": "0000-01-01",
           "rates": {
             "reduced": 9.0,
@@ -309,6 +368,22 @@
       "code": "EL",
       "country_code": "GR",
       "periods": [
+        {
+          "effective_from": "2024-07-01",
+          "rates": {
+            "reduced1": 6.0,
+            "reduced2": 13.5,
+            "standard": 24.0
+          }
+        },
+        {
+          "effective_from": "2024-01-01",
+          "rates": {
+            "reduced1": 6.0,
+            "reduced2": 13.0,
+            "standard": 24.0
+          }
+        },
         {
           "effective_from": "2016-06-01",
           "rates": {
@@ -462,11 +537,61 @@
       "country_code": "DE",
       "periods": [
         {
+          "effective_from": "2021-01-01",
+          "rates": {
+            "reduced": 7.0,
+            "standard": 19.0
+          },
+          "exceptions": [
+            {
+              "name": "Büsingen am Hochrhein",
+              "postcode": "78266",
+              "standard": 0.0
+            },
+            {
+              "name": "Heligoland",
+              "postcode": "27498",
+              "standard": 0.0
+            }
+          ]
+        },
+        {
+          "effective_from": "2020-07-01",
+          "rates": {
+            "reduced": 5.0,
+            "standard": 16.0
+          },
+          "exceptions": [
+            {
+              "name": "Büsingen am Hochrhein",
+              "postcode": "78266",
+              "standard": 0.0
+            },
+            {
+              "name": "Heligoland",
+              "postcode": "27498",
+              "standard": 0.0
+            }
+          ]
+        },
+        {
           "effective_from": "0000-01-01",
           "rates": {
             "reduced": 7.0,
             "standard": 19.0
-          }
+          },
+          "exceptions": [
+            {
+              "name": "Büsingen am Hochrhein",
+              "postcode": "78266",
+              "standard": 0.0
+            },
+            {
+              "name": "Heligoland",
+              "postcode": "27498",
+              "standard": 0.0
+            }
+          ]
         }
       ]
     },
